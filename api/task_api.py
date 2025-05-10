@@ -1,19 +1,33 @@
 import os
 import requests
 
+from utils.attach import log_and_attach_request, log_and_attach_response
+
 
 class TaskApi:
-    base_url = "https://api.todoist.com/api/v1"
-    token = os.getenv("TODOIST_TOKEN", "your_token_here")
-    headers = {"Authorization": f"Bearer {token}"}
+    BASE_URL = "https://api.todoist.com/api/v1"
+
+    def __init__(self):
+        token = os.getenv("TODOIST_TOKEN", "3761db9b4f85df5ff1f2278cdb33ee3ad76c6168")
+        if not token:
+            raise EnvironmentError("TODOIST_TOKEN is not set in environment variables")
+        self.headers = {"Authorization": f"Bearer {token}"}
+
+    def _request(self, method, endpoint, **kwargs):
+        url = f"{self.BASE_URL}{endpoint}"
+        response = requests.request(method, url, headers=self.headers, **kwargs)
+        log_and_attach_request(response.request)
+        log_and_attach_response(response)
+        return response
 
     def create_task(self, task_data):
-        return requests.post(
-            f"{self.base_url}/tasks", json=task_data, headers=self.headers
-        )
+        return self._request("post", "/tasks", json=task_data)
 
     def get_task(self, task_id):
-        return requests.get(f"{self.base_url}/tasks/{task_id}", headers=self.headers)
+        return self._request("get", f"/tasks/{task_id}")
 
     def delete_task(self, task_id):
-        return requests.delete(f"{self.base_url}/tasks/{task_id}", headers=self.headers)
+        return self._request("delete", f"/tasks/{task_id}")
+
+    def update_task(self, task_id, task_data):
+        return self._request("post", f"/tasks/{task_id}", json=task_data)
