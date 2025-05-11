@@ -1,0 +1,152 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Task payload",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "content"
+    ],
+    "properties": {
+        "content": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Обязательный текст задачи (не пустой)"
+        },
+        "description": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Расширенное описание задачи"
+        },
+        "project_id": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "description": "ID проекта, куда кладём задачу"
+        },
+        "section_id": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "description": "ID секции внутри проекта"
+        },
+        "parent_id": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "description": "ID родительской задачи, если это подзадача"
+        },
+        "order": {
+            "type": [
+                "integer",
+                "null"
+            ],
+            "minimum": 1,
+            "description": "Позиция в пользовательской сортировке"
+        },
+        "labels": {
+            "type": [
+                "array",
+                "null"
+            ],
+            "description": "Массив ярлыков (строки)",
+            "items": {
+                "type": "string"
+            }
+        },
+        "priority": {
+            "type": [
+                "integer",
+                "null"
+            ],
+            "enum": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "description": "Приоритет: 1 – низкий, 4 – критический"
+        },
+        "assignee_id": {
+            "type": [
+                "integer",
+                "null"
+            ],
+            "description": "Пользователь, на кого назначена задача"
+        },
+        "due_string": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Свободная строка дедлайна, натуральный язык"
+        },
+        "due_date": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "format": "date",
+            "description": "Дедлайн в формате YYYY‑MM‑DD"
+        },
+        "due_datetime": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "format": "date-time",
+            "description": "Дедлайн с временем в RFC 3339"
+        },
+        "due_lang": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Язык парсинга due_string (en, ru …)"
+        },
+        "duration": {
+            "type": [
+                "integer",
+                "null"
+            ],
+            "minimum": 0,
+            "description": "Длительность задачи в единицах duration_unit"
+        },
+        "duration_unit": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "enum": [
+                "minute",
+                "day",
+                "week",
+                "month",
+                "year"
+            ],
+            "description": "Единица измерения duration"
+        },
+        "deadline_date": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "format": "date",
+            "description": "Жёсткий дедлайн (если отличается от due_date)"
+        },
+        "deadline_lang": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Язык строки жёсткого дедлайна"
+        }
+    }
+}

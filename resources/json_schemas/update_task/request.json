@@ -1,0 +1,114 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UpdateTaskRequest",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "content": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "description": "Новый текст задачи. Передайте 0 или null, чтобы оставить без изменений."
+        },
+        "description": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "description": "Детальное описание задачи."
+        },
+        "labels": {
+            "type": [
+                "array",
+                "integer",
+                "null"
+            ],
+            "description": "Массив ID или имён ярлыков, которые нужно назначить.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "priority": {
+            "type": [
+                "integer",
+                "null"
+            ],
+            "description": "Приоритет (1‑4). 0 / null — без изменений.",
+            "minimum": 1,
+            "maximum": 4
+        },
+        "due_string": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "description": "Читаемая строка срока (напр. «tomorrow at 18:00»)."
+        },
+        "due_date": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "description": "Дата выполнения в формате YYYY‑MM‑DD."
+        },
+        "due_datetime": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "format": "date-time",
+            "description": "Полная дата‑время срока в ISO 8601 (UTC)."
+        },
+        "due_lang": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "description": "Язык парсинга поля due_string (например, \"ru\", \"en\")."
+        },
+        "assignee_id": {
+            "type": [
+                "integer",
+                "null"
+            ],
+            "description": "ID пользователя, на кого назначается задача."
+        },
+        "duration": {
+            "type": [
+                "integer",
+                "null"
+            ],
+            "description": "Длительность задачи в единицах duration_unit."
+        },
+        "duration_unit": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Единицы длительности: \"minute\", \"hour\", \"day\", и т.д."
+        },
+        "deadline_date": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "description": "Жёсткий крайний срок (YYYY‑MM‑DD)."
+        },
+        "deadline_lang": {
+            "type": [
+                "string",
+                "integer",
+                "null"
+            ],
+            "description": "Язык парсинга deadline_date."
+        }
+    }
+}

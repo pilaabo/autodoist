@@ -8,7 +8,7 @@ class TaskApi:
     BASE_URL = "https://api.todoist.com/api/v1"
 
     def __init__(self):
-        token = os.getenv("TODOIST_TOKEN", "3761db9b4f85df5ff1f2278cdb33ee3ad76c6168")
+        token = os.getenv("TODOIST_TOKEN")
         if not token:
             raise EnvironmentError("TODOIST_TOKEN is not set in environment variables")
         self.headers = {"Authorization": f"Bearer {token}"}

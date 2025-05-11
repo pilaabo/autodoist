@@ -2,10 +2,20 @@ import pytest
 import allure
 
 
-def test_create_task(task_api, task_payload):
+from utils.validate import validate_request_and_response
+
+
+def test_create_task(
+    task_api, task_payload, create_task_request_schema, create_task_response_schema
+):
     with allure.step("Create task"):
         response = task_api.create_task(task_payload)
         assert response.status_code == 200
+        validate_request_and_response(
+            response,
+            request_schema=create_task_request_schema,
+            response_schema=create_task_response_schema,
+        )
         created_task = response.json()
 
     with allure.step("Fetch created task"):
@@ -26,6 +36,11 @@ def test_create_task(task_api, task_payload):
             {"description": "Task with no content"},
             "Required argument is missing",
             id="missing_content_field",
+        ),
+        pytest.param(
+            {"content": 123},
+            "Invalid argument value",
+            id="wrong_content_type",
         ),
     ],
 )
@@ -57,18 +72,28 @@ def test_delete_task_marks_entity_as_deleted(task_api, created_task):
 
 @pytest.mark.parametrize(
     "new_content",
-    ["Updated task content"],
+    [
+        "Updated task content",
+        "x" * 100,
+        "Special chars: !@#$%^&*()",
+    ],
 )
-def test_update_task(task_api, created_task, new_content):
+def test_update_task(task_api, created_task, new_content, update_task_request_schema, update_task_response_schema):
     task_id = created_task["id"]
-
 
     with allure.step("Update task"):
         update_response = task_api.update_task(task_id, {"content": new_content})
         assert update_response.status_code == 200
+        validate_request_and_response(
+            update_response,
+            request_schema=update_task_request_schema,
+            response_schema=update_task_response_schema,
+        )
+        updated_task = update_response.json()
 
     with allure.step("Fetch updated task"):
-        updated_task = task_api.get_task(task_id).json()
+        fetched_task = task_api.get_task(task_id).json()
 
     with allure.step("Assert task is updated"):
-        assert updated_task["content"] == new_content
+        assert fetched_task["content"] == new_content
+        assert fetched_task == updated_task

@@ -1,0 +1,206 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UpdateTaskResponse",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "user_id",
+        "id",
+        "project_id",
+        "section_id",
+        "parent_id",
+        "added_by_uid",
+        "assigned_by_uid",
+        "responsible_uid",
+        "labels",
+        "deadline",
+        "duration",
+        "checked",
+        "is_deleted",
+        "added_at",
+        "completed_at",
+        "updated_at",
+        "due",
+        "priority",
+        "child_order",
+        "content",
+        "description",
+        "note_count",
+        "day_order",
+        "is_collapsed"
+    ],
+    "properties": {
+        "user_id": {
+            "type": "string",
+            "description": "UID владельца задачи"
+        },
+        "id": {
+            "type": "string",
+            "description": "Идентификатор задачи"
+        },
+        "project_id": {
+            "type": "string",
+            "description": "ID проекта"
+        },
+        "section_id": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "ID секции (null — без секции)"
+        },
+        "parent_id": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "ID родителя (null — корневая задача)"
+        },
+        "added_by_uid": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Кто создал задачу"
+        },
+        "assigned_by_uid": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Кто назначил исполнителя"
+        },
+        "responsible_uid": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Кто отвечает за выполнение"
+        },
+        "labels": {
+            "type": "array",
+            "description": "Список ярлыков",
+            "items": {
+                "type": "string"
+            },
+            "uniqueItems": true
+        },
+        "deadline": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "description": "Легаси‑структура дедлайна",
+            "additionalProperties": true
+        },
+        "duration": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "description": "Длительность задачи",
+            "additionalProperties": true
+        },
+        "checked": {
+            "type": "boolean",
+            "description": "Галочка выполнено (на уровне клиента)"
+        },
+        "is_deleted": {
+            "type": "boolean",
+            "description": "Флаг удалённой задачи"
+        },
+        "added_at": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "format": "date-time",
+            "description": "Время создания (ISO 8601, UTC)"
+        },
+        "completed_at": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "format": "date-time",
+            "description": "Когда задача была завершена"
+        },
+        "updated_at": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "format": "date-time",
+            "description": "Последнее обновление"
+        },
+        "due": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "description": "Нормализованный срок выполнения",
+            "properties": {
+                "string": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "datetime": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "date-time"
+                },
+                "timezone": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "lang": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "is_recurring": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4,
+            "description": "Приоритет задачи (1 — низкий, 4 — высокий)"
+        },
+        "child_order": {
+            "type": "integer",
+            "description": "Позиция среди детей parent‑задачи"
+        },
+        "content": {
+            "type": "string",
+            "description": "Текст задачи"
+        },
+        "description": {
+            "type": "string",
+            "description": "Развёрнутое описание"
+        },
+        "note_count": {
+            "type": "integer",
+            "description": "Сколько комментариев прикреплено"
+        },
+        "day_order": {
+            "type": "integer",
+            "description": "Порядок вывода в «Сегодня»"
+        },
+        "is_collapsed": {
+            "type": "boolean",
+            "description": "Свернута ли подзадачи"
+        }
+    }
+}

@@ -1,0 +1,171 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Created task",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "user_id": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string"
+        },
+        "project_id": {
+            "type": "string"
+        },
+        "section_id": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "parent_id": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "added_by_uid": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "assigned_by_uid": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "responsible_uid": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "labels": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "deadline": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "property1": {
+                            "type": "string"
+                        },
+                        "property2": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "property1",
+                        "property2"
+                    ],
+                    "additionalProperties": true
+                }
+            ]
+        },
+        "duration": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "property1": {
+                            "type": "number"
+                        },
+                        "property2": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "property1",
+                        "property2"
+                    ],
+                    "additionalProperties": true
+                }
+            ]
+        },
+        "checked": {
+            "type": "boolean"
+        },
+        "is_deleted": {
+            "type": "boolean"
+        },
+        "added_at": {
+            "type": "string"
+        },
+        "completed_at": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "updated_at": {
+            "type": "string"
+        },
+        "due": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            ]
+        },
+        "priority": {
+            "type": "integer"
+        },
+        "child_order": {
+            "type": "integer"
+        },
+        "content": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "note_count": {
+            "type": "integer"
+        },
+        "day_order": {
+            "type": "integer"
+        },
+        "is_collapsed": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "user_id",
+        "id",
+        "project_id",
+        "parent_id",
+        "labels",
+        "deadline",
+        "duration",
+        "checked",
+        "is_deleted",
+        "added_at",
+        "completed_at",
+        "updated_at",
+        "due",
+        "priority",
+        "child_order",
+        "content",
+        "description",
+        "note_count",
+        "day_order",
+        "is_collapsed"
+    ]
+}
